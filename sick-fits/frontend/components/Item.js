@@ -17,6 +17,7 @@ export default class componentName extends Component {
         {item.image ? <img src="item.image" alt="item.title" /> : null}
         <Title>
           <Link
+            as={`/item/${item.title.split(' ').join('-')}`}
             href={{
               pathname: '/item',
               query: { id: item.id }
