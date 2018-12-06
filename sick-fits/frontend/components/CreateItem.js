@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
+import Router from 'next/router'
 import gql from 'graphql-tag'
 import Form from './styles/Form'
 import Error from './ErrorMessage'
@@ -43,12 +44,18 @@ export default class CreateItem extends Component {
       <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
         {(createItem, { loading, error }) => (
           <Form
-            onSubmit={e => {
+            onSubmit={async e => {
               e.preventDefault()
+              const res = await createItem()
+              console.log(res)
+              Router.push({
+                pathname: '/item',
+                query: { id: res.data.createItem.id }
+              })
             }}
           >
             <Error error={error} />
-            <fieldset>
+            <fieldset disabled={loading} aria-busy={loading}>
               <label htmlFor="title">
                 Title
                 <input
