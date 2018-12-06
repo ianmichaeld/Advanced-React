@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import Form from './styles/Form'
+import Error from './ErrorMessage'
 import formatMoney from '../lib/formatMoney'
 
 const CREATE_ITEM_MUTATION = gql`
@@ -39,13 +40,14 @@ export default class CreateItem extends Component {
   }
   render() {
     return (
-      <Mutation query={CREATE_ITEM_MUTATION} variables={this.state}>
+      <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
         {(createItem, { loading, error }) => (
           <Form
             onSubmit={e => {
               e.preventDefault()
             }}
           >
+            <Error error={error} />
             <fieldset>
               <label htmlFor="title">
                 Title
