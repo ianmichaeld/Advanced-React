@@ -7,7 +7,8 @@ const Query = {
   //   }
 
   // shortcut for the above where no filtering or custom logic is req'd
-  items: forwardTo('db')
+  items: forwardTo('db'),
+  item: forwardTo('db')
 }
 
 module.exports = Query
