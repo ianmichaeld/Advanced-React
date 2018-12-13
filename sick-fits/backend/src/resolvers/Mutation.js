@@ -7,7 +7,6 @@ const Mutations = {
   updateItem(parent, args, ctx, info) {
     const updates = { ...args }
     delete updates.id
-    console.log(updates)
     return ctx.db.mutation.updateItem(
       {
         data: updates,
@@ -15,6 +14,12 @@ const Mutations = {
       },
       info
     )
+  },
+  async deleteItem(parent, args, ctx, info) {
+    const where = { id: args.id }
+    const item = await ctx.db.query.item({ where }, `{ id title }`)
+    // TODO: add user and user ID to query and check if user has permission to delete
+    return ctx.db.mutation.deleteItem({ where }, info)
   }
 }
 

@@ -10,6 +10,7 @@ type Mutation {
   ): Item!
   # Todo: add ability to update image and largeImage
   updateItem(id: ID!, title: String, description: String, price: Int): Item!
+  deleteItem(id: ID!): Item
 }
 
 type Query {
